@@ -118,7 +118,7 @@ Every push and pull request runs these checks in [GitHub Actions](.github/workfl
 
 ## Development
 
-Requirements: Node.js 24 or later, and Chrome for the end-to-end tests and the store images.
+Requirements: Node.js 26 or later, and Chrome for the end-to-end tests and the store images.
 
 ```sh
 npm install

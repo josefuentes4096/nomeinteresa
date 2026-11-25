@@ -1,5 +1,5 @@
 // Minimal helpers to drive a real headless Chrome over the DevTools protocol,
-// with no third-party dependencies (uses the WebSocket client built into Node 24).
+// with no third-party dependencies (uses the WebSocket client built into Node 26).
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
@@ -70,7 +70,7 @@ class CdpConnection {
 /** Launches headless Chrome with a throwaway profile. */
 export async function launchChrome() {
   if (typeof WebSocket === 'undefined') {
-    throw new Error('WebSocket is not available: use Node.js 24 or later (see "engines" in package.json).');
+    throw new Error('WebSocket is not available: use Node.js 26 or later (see "engines" in package.json).');
   }
   const userDataDir = await mkdtemp(join(tmpdir(), 'nomeinteresa-e2e-'));
   const args = [

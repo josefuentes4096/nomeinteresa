@@ -118,7 +118,7 @@ Cada push y pull request ejecuta estos controles en [GitHub Actions](.github/wor
 
 ## Desarrollo
 
-Requisitos: Node.js 24 o superior, y Chrome para los tests end-to-end y las imágenes de la tienda.
+Requisitos: Node.js 26 o superior, y Chrome para los tests end-to-end y las imágenes de la tienda.
 
 ```sh
 npm install
