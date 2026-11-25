@@ -6,7 +6,7 @@ import { loadSettings, saveSites, siteFromPattern, sitePattern } from '../shared
 
 // A site is enabled when the user grants host access to it from the popup,
 // and disabled when that access is removed (from the popup or from
-// chrome://extensions). The worker turns those permission events into the
+// the browser's extension settings). The worker turns those permission events into the
 // stored site list and the content script registration. Doing this here, not in
 // the popup, matters: the popup may close while Chrome shows the permission prompt.
 

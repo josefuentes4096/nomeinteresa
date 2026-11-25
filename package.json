@@ -2,9 +2,11 @@
   "name": "nomeinteresa",
   "version": "1.0.0",
   "private": true,
-  "description": "Chrome extension that hides news articles whose headlines match your keywords, on the sites you choose.",
+  "description": "Browser extension for Chrome and Firefox that hides news articles whose headlines match your keywords, on the sites you choose.",
   "keywords": [
     "chrome-extension",
+    "firefox-addon",
+    "webextension",
     "manifest-v3",
     "content-filter",
     "news",
@@ -26,12 +28,13 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "lint:firefox": "web-ext lint --source-dir extension",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --project jsconfig.json",
     "test": "node --test \"tests/*.test.js\"",
     "test:e2e": "node --test tests/e2e/filter.e2e.js",
-    "check": "npm run lint && npm run format:check && npm run typecheck && npm test",
+    "check": "npm run lint && npm run lint:firefox && npm run format:check && npm run typecheck && npm test",
     "package": "node scripts/package.js",
     "store-assets": "node scripts/store-assets.js"
   },
@@ -41,6 +44,7 @@
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "web-ext": "^10.8.0"
   }
 }

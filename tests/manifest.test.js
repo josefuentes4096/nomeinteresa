@@ -35,3 +35,28 @@ describe('manifest, ready for the Chrome Web Store', () => {
     assert.deepEqual([...manifest.permissions].sort(), ['activeTab', 'scripting', 'storage']);
   });
 });
+
+describe('manifest, shared by Chrome and Firefox', () => {
+  /** Chrome accepts `background.scripts` next to `service_worker` in Manifest V3 from version 121. */
+  const MIN_CHROME_WITH_BACKGROUND_SCRIPTS = 121;
+
+  it('runs the same background script as a service worker (Chrome) and a background script (Firefox)', () => {
+    assert.deepEqual(manifest.background.scripts, [manifest.background.service_worker]);
+    assert.equal(manifest.background.type, 'module');
+  });
+
+  it('requires a Chrome version that accepts both background keys', () => {
+    assert.ok(Number(manifest.minimum_chrome_version) >= MIN_CHROME_WITH_BACKGROUND_SCRIPTS);
+  });
+
+  it('keeps the Firefox add-on ID (it can never change once published)', () => {
+    assert.equal(manifest.browser_specific_settings.gecko.id, 'nomeinteresa@josefuentes4096');
+  });
+
+  it('declares to Firefox that it collects no data, with minimum versions that support the declaration', () => {
+    const { gecko, gecko_android: android } = manifest.browser_specific_settings;
+    assert.deepEqual(gecko.data_collection_permissions, { required: ['none'] });
+    assert.ok(parseFloat(gecko.strict_min_version) >= 140);
+    assert.ok(parseFloat(android.strict_min_version) >= 142);
+  });
+});

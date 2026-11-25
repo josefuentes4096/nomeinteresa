@@ -5,9 +5,10 @@
 [![CI](https://github.com/josefuentes4096/nomeinteresa/actions/workflows/ci.yml/badge.svg)](https://github.com/josefuentes4096/nomeinteresa/actions/workflows/ci.yml)
 [![License: 0BSD](https://img.shields.io/badge/license-0BSD-blue.svg)](LICENSE)
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)
+![Firefox add-on](https://img.shields.io/badge/Firefox-140%2B-FF7139?logo=firefoxbrowser&logoColor=white)
 ![No dependencies at runtime](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
 
-Chrome extension that **hides news articles whose headline contains your keywords**, on the sites you choose. The name comes from the Spanish _no me interesa_, "I'm not interested".
+Browser extension for **Chrome and Firefox** that **hides news articles whose headline contains your keywords**, on the sites you choose. The name comes from the Spanish _no me interesa_, "I'm not interested".
 
 ![A news front page with five articles hidden and the popup listing them](store/images/en/screenshot-1-filtered.png)
 
@@ -25,7 +26,8 @@ This project is **purely academic**. I built it to practice taking a browser ext
 - **Report:** the popup lists the articles hidden on the current page (lead-in, headline and the keyword that matched) and how many there are.
 - **Badge:** the toolbar icon shows how many articles are hidden on the current tab, as a red notification badge.
 - **Live:** articles added while you scroll are filtered too, and keyword changes apply right away to open tabs.
-- **Languages:** English and Spanish, following Chrome's language.
+- **Chrome and Firefox:** the same code and the same manifest run in both browsers.
+- **Languages:** English and Spanish, following the browser's language.
 
 | Before / after                                                               | Popup                                                                |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -36,13 +38,17 @@ _Screenshots use a fictional demo page with made-up headlines (`store/assets-src
 ## Installation
 
 - **Chrome Web Store:** coming soon.
-- **Developer mode:** open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the **`extension/`** folder.
+- **Firefox Add-ons:** coming soon.
+- **Chrome, developer mode:** open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the **`extension/`** folder.
+- **Firefox, temporary install:** open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on…** and select **`extension/manifest.json`**. It stays installed until Firefox restarts.
+
+Requires Chrome 121 or later, or Firefox 140 or later (desktop).
 
 ## Usage
 
 1. Open the news site you want to filter and click the extension icon.
 2. Add a keyword set (for example **+ Football**) or type your own keywords, one per line.
-3. Turn on **Hide matching articles on this site** and accept Chrome's prompt to allow access to that site.
+3. Turn on **Hide matching articles on this site** and accept the browser's prompt to allow access to that site.
 
 To stop filtering a site, turn the toggle off. Keywords are shared by all enabled sites.
 
@@ -81,7 +87,7 @@ The extension **does not connect to any server**: no analytics, no telemetry, no
 | `activeTab`                             | Read the current tab's address when you open the popup, to show and toggle its site.             |
 | `optional_host_permissions` (`*://*/*`) | Nothing is granted on install. Access is requested **per site**, only when you enable that site. |
 
-You can review or remove site access at any time in `chrome://extensions` → nomeinteresa → Details → Site access.
+You can review or remove site access at any time: in Chrome, `chrome://extensions` → nomeinteresa → Details → Site access; in Firefox, `about:addons` → nomeinteresa → Permissions.
 
 ## Known limitations
 
@@ -90,13 +96,14 @@ You can review or remove site access at any time in `chrome://extensions` → no
 - A quoted keyword still matches when a title starts with the common word: `"Máxima"` hides "Máxima tensión en…".
 - Some single words are left out of the keyword sets on purpose because they are also common words (for example "Boca", which also means "mouth"). Add them yourself if you want them.
 - On a slow page, a matching article may show for a moment before it is hidden on first load.
-- It doesn't run on protected Chrome pages (`chrome://`, Chrome Web Store).
+- It doesn't run on protected browser pages (`chrome://`, `about:`, the Chrome Web Store, addons.mozilla.org).
 
 ## Engineering highlights
 
 - **Spec-driven development.** Behavior is agreed in writing before code: [spec 001](docs/specs/001-keyword-filter/spec.md) lists every requirement, and each acceptance criterion links to the test that verifies it. A decision log records why things are the way they are.
 - **Tested against a real browser, with no test dependencies.** End-to-end tests drive headless Chrome over the DevTools protocol with a small in-house client (`tests/e2e/chrome.js`) and run the real content scripts on pages that reproduce real news-site markup: headline cards, lead-ins, article pages, duplicated articles and infinite scroll. Bugs found on live sites became fixtures before they were fixed.
 - **Typed JavaScript, no build step.** Plain ES modules with JSDoc types checked by TypeScript in `strict` mode. What is in `extension/` is exactly what ships.
+- **One manifest, two browsers.** The same `extension/` folder and the same zip run in Chrome and Firefox: the manifest lists the background script both as a service worker (Chrome) and as a background script (Firefox), plus Firefox's add-on settings. Mozilla's `web-ext lint` checks it in CI, and tests pin the shared-manifest rules.
 - **Least privilege.** No host access at install; per-site access requested at runtime and revocable; no network access at all. A test fails if the manifest asks for more.
 - **Pure core, thin shell.** Matching, title and card detection live in a file with no `chrome.*` calls, so the same code runs in Node unit tests, in end-to-end tests and in the extension.
 - **Reproducible release.** `npm run package` builds the store zip with a dependency-free ZIP writer; `npm run store-assets` regenerates every store image from HTML layouts using the real popup and content scripts on a fictional demo page. CI builds the zip on every push.
@@ -111,6 +118,7 @@ Every push and pull request runs these checks in [GitHub Actions](.github/workfl
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Lint             | ESLint (flat config): recommended rules plus strict equality, `const`/no `var`, and restricted `console`                                                   |
 | Formatting       | Prettier and EditorConfig                                                                                                                                  |
+| Firefox lint     | Mozilla's `web-ext lint` over `extension/`: the manifest and code are valid for Firefox                                                                    |
 | Types            | TypeScript in `strict` mode with `checkJs`, over JSDoc-annotated JavaScript                                                                                |
 | Unit tests       | `node:test`: keyword matching, settings validation, keyword sets, badge text, store limits, translation parity and content script rules                    |
 | End-to-end tests | The real content scripts in **headless Chrome** on realistic news-page markup, checking exactly what is hidden, what the popup reports and the badge count |
@@ -118,13 +126,13 @@ Every push and pull request runs these checks in [GitHub Actions](.github/workfl
 
 ## Development
 
-Requirements: Node.js 26 or later, and Chrome for the end-to-end tests and the store images.
+Requirements: Node.js 26 or later, and Chrome for the end-to-end tests and the store images. Firefox is optional, for manual testing.
 
 ```sh
 npm install
-npm run check          # lint + formatting + types + unit tests
+npm run check          # lint + Firefox lint + formatting + types + unit tests
 npm run test:e2e       # content scripts in headless Chrome (set CHROME_PATH if Chrome is not in a standard location)
-npm run package        # dist/nomeinteresa-<version>.zip for the Chrome Web Store
+npm run package        # dist/nomeinteresa-<version>.zip for the Chrome Web Store and Firefox Add-ons
 npm run store-assets   # regenerate store/images/
 npm run format         # format the code with Prettier
 ```
@@ -150,7 +158,7 @@ tests/                     Unit tests (node:test)
 scripts/                   package.js (store zip), store-assets.js (store images)
 store/                     Store listing texts, privacy answers, images and their HTML sources
 docs/specs/                Specifications (template + one folder per spec)
-docs/publishing.md         Chrome Web Store release checklist
+docs/publishing.md         Release checklist for the Chrome Web Store and Firefox Add-ons
 CLAUDE.md                  Project constitution: rules, workflow and conventions
 ```
 

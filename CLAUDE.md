@@ -1,6 +1,6 @@
 # nomeinteresa: project constitution
 
-Chrome extension (Manifest V3) that **hides news articles whose title contains any of the user's keywords**, on the sites the user enables (for example, every football article on a news portal). The product is described in [docs/specs/001-keyword-filter/spec.md](docs/specs/001-keyword-filter/spec.md), which is the source of truth for behavior.
+Browser extension for Chrome and Firefox (Manifest V3) that **hides news articles whose title contains any of the user's keywords**, on the sites the user enables (for example, every football article on a news portal). The product is described in [docs/specs/001-keyword-filter/spec.md](docs/specs/001-keyword-filter/spec.md), which is the source of truth for behavior.
 
 ## Non-negotiable rules
 
@@ -33,10 +33,10 @@ Chrome extension (Manifest V3) that **hides news articles whose title contains a
 ## Commands
 
 ```sh
-npm run check      # lint + format check + type check + unit tests (must pass)
+npm run check      # lint + Firefox lint + format check + type check + unit tests (must pass)
 npm run test:e2e   # content scripts in headless Chrome (must pass for content script changes)
 npm run format     # Prettier
-npm run package    # dist/nomeinteresa-<version>.zip for the Chrome Web Store
+npm run package    # dist/nomeinteresa-<version>.zip for the Chrome Web Store and Firefox Add-ons
 npm run store-assets  # regenerate store/images/ after visible popup changes
 ```
 
@@ -44,6 +44,7 @@ npm run store-assets  # regenerate store/images/ after visible popup changes
 
 - Plain JavaScript with ES modules (except the content scripts, see rule 6), `// @ts-check` and JSDoc types, checked by `tsc` (`jsconfig.json`). No build step: `extension/` is exactly what ships.
 - Pure logic (settings validation, presets, matching) lives in modules without `chrome.*` calls at import time, so Node tests can import them.
+- **One manifest for Chrome and Firefox.** Keep `background.scripts` next to `background.service_worker` (Firefox ignores the worker, Chrome ignores the scripts) and keep `browser_specific_settings.gecko` (the add-on ID never changes). Use only APIs both browsers support; `npm run lint:firefox` and `tests/manifest.test.js` guard this.
 - Enabling a site **is** granting host access to it. The service worker turns permission events into the stored site list and the content script registration; the popup only requests or removes the permission.
 - Keyword presets live in `extension/shared/presets.js`. Avoid keywords that are also common words (matching is whole-word, case- and accent-insensitive on every title).
 - Name constants instead of using magic numbers. Document why, not what.

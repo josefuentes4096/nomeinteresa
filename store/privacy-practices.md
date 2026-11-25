@@ -1,4 +1,4 @@
-# Chrome Web Store: Privacy practices tab
+# Privacy answers: Chrome Web Store and Firefox Add-ons
 
 Answers for the Developer Dashboard's **Privacy practices** tab. They must
 match the code and [PRIVACY.md](../PRIVACY.md); update all three together.
@@ -32,6 +32,10 @@ Then certify the three statements:
 - I do not sell or transfer user data to third parties, outside of the approved use cases.
 - I do not use or transfer user data for purposes that are unrelated to my item's single purpose.
 - I do not use or transfer user data to determine creditworthiness or for lending purposes.
+
+## Firefox Add-ons
+
+Firefox reads the data-collection answer from the manifest: `browser_specific_settings.gecko.data_collection_permissions` is `{ "required": ["none"] }`, so Firefox and the add-on's page show that it collects no data. The same reasoning as above applies: headlines are read inside the browser only to decide what to hide. Paste the text of [PRIVACY.md](../PRIVACY.md) in the **Privacy policy** field of the product page.
 
 ## Privacy policy URL
 
