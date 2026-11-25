@@ -1,0 +1,75 @@
+<!doctype html>
+<!--
+  Home page markup modeled on a news portal that uses lead-ins: a lead-in ("volanta") in
+  div.epigraph right before the h4 headline, both inside the card's link.
+  The lead-in counts as part of the title; other text near a headline doesn't.
+  data-expect marks the result after filtering for "fútbol" and "Messi".
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Portada</title>
+  </head>
+  <body>
+    <main>
+      <section class="cards">
+        <div class="article-card" id="leadin-match" data-expect="hidden">
+          <a class="card-link" href="/2026/11/24/agenda/">
+            <div class="article-card__header">
+              <div class="card-image"><img alt="" /></div>
+            </div>
+            <div class="article-card__info">
+              <div class="article-card__content">
+                <div class="epigraph">
+                  <div class="label">
+                    <span class="label-text">La agenda del fútbol sigue cargada</span>
+                  </div>
+                </div>
+                <h4 class="card-heading title">Ya piensan en el próximo rival del domingo</h4>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="article-card" id="leadin-other" data-expect="visible">
+          <a class="card-link" href="/2026/11/24/economia/">
+            <div class="article-card__info">
+              <div class="article-card__content">
+                <div class="epigraph">
+                  <div class="label"><span class="label-text">Economía</span></div>
+                </div>
+                <h4 class="card-heading title">El Gobierno anunció nuevas medidas</h4>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- A byline before the headline is not a lead-in. -->
+        <div class="article-card" id="byline-before" data-expect="visible">
+          <a class="card-link" href="/2026/11/24/opinion/">
+            <p class="author-name">Por Lionel Messi</p>
+            <h4 class="card-heading title">Una carta sobre la educación pública</h4>
+          </a>
+        </div>
+
+        <!-- A long block before the headline is content, not a lead-in. -->
+        <div class="article-card" id="long-before" data-expect="visible">
+          <a class="card-link" href="/2026/11/24/cultura/">
+            <p>
+              Una exposición repasa cien años de historia del barrio, con fotografías de fiestas populares,
+              bailes, el fútbol de los domingos, las ferias y la vida cotidiana de sus vecinos.
+            </p>
+            <h4 class="card-heading title">Abre una muestra sobre la historia de La Boca</h4>
+          </a>
+        </div>
+      </section>
+
+      <!-- Flat list: the summary of one article sits right before the next headline. -->
+      <section class="flat">
+        <h3 id="flat-first" data-expect="visible"><a href="/2026/11/24/clima/">Alerta por tormentas</a></h3>
+        <p>Messi suspendió su viaje por el temporal.</p>
+        <h3 id="flat-second" data-expect="visible"><a href="/2026/11/24/transito/">Cortes de tránsito</a></h3>
+      </section>
+    </main>
+  </body>
+</html>

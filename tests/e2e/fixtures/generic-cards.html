@@ -1,0 +1,38 @@
+<!doctype html>
+<!--
+  Common news markup: <article> cards with a linked title and a section tag
+  link, plus an article page whose own <h1> headline matches a keyword.
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Artículo</title>
+  </head>
+  <body>
+    <main>
+      <article class="story" id="main-article" data-expect="visible">
+        <h1>Fútbol y economía: el negocio de los clubes</h1>
+        <p>The article the user opened is never hidden, even if its headline matches.</p>
+      </article>
+
+      <aside>
+        <h2>Relacionadas</h2>
+        <ul class="related">
+          <li id="related-football" data-expect="hidden">
+            <article class="card">
+              <a class="tag" href="/deportes/">Deportes</a>
+              <h3 class="card__title"><a href="/nota/1">Boca y River, un clásico de fútbol</a></h3>
+              <p>Resumen.</p>
+            </article>
+          </li>
+          <li id="related-other" data-expect="visible">
+            <article class="card">
+              <a class="tag" href="/politica/">Política</a>
+              <h3 class="card__title"><a href="/nota/2">El Congreso debate el presupuesto</a></h3>
+            </article>
+          </li>
+        </ul>
+      </aside>
+    </main>
+  </body>
+</html>

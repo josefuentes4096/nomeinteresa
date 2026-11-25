@@ -1,0 +1,127 @@
+{
+  "extName": {
+    "message": "nomeinteresa"
+  },
+  "extDescription": {
+    "message": "Oculta las noticias cuyo título contiene tus palabras clave, en los sitios que elijas."
+  },
+  "actionTitle": {
+    "message": "nomeinteresa"
+  },
+  "badgeTitle": {
+    "message": "nomeinteresa: $COUNT$ ocultos en esta página",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupTitle": {
+    "message": "nomeinteresa"
+  },
+  "popupThisSite": {
+    "message": "Este sitio"
+  },
+  "popupSiteEnabled": {
+    "message": "Ocultar artículos coincidentes en este sitio"
+  },
+  "popupHiddenHeading": {
+    "message": "Ocultos en esta página ($COUNT$)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupHiddenNone": {
+    "message": "No hay artículos ocultos en esta página."
+  },
+  "popupHiddenInactive": {
+    "message": "El filtro está desactivado en esta página."
+  },
+  "popupMatchedKeyword": {
+    "message": "Palabra clave que coincidió: $KEYWORD$",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupSiteUnavailable": {
+    "message": "No se puede filtrar esta página."
+  },
+  "popupKeywords": {
+    "message": "Palabras clave"
+  },
+  "popupKeywordsPlaceholder": {
+    "message": "fútbol\nMessi\nMundial"
+  },
+  "popupKeywordsHelp": {
+    "message": "Una por línea. Se ocultan los artículos cuyo título (titular o volanta) contiene una palabra clave como palabra completa, sin distinguir mayúsculas ni acentos. Escribe una palabra entre comillas para respetar las mayúsculas: \"Máxima\" oculta \"Máxima visitó…\" pero no \"temperatura máxima\". Se aplica a todos los sitios activados."
+  },
+  "popupAddPreset": {
+    "message": "Agregar un conjunto de palabras:"
+  },
+  "presetFarandula": {
+    "message": "Farándula"
+  },
+  "presetFutbol": {
+    "message": "Fútbol"
+  },
+  "presetAutomovilismo": {
+    "message": "Automovilismo"
+  },
+  "presetRugby": {
+    "message": "Rugby"
+  },
+  "presetTecnoptimistas": {
+    "message": "Tecnoptimistas"
+  },
+  "presetGastronomia": {
+    "message": "Gastronomía"
+  },
+  "presetCelebridades": {
+    "message": "Celebridades"
+  },
+  "statusSaved": {
+    "message": "Palabras clave guardadas."
+  },
+  "statusPresetAdded": {
+    "message": "Se agregaron $COUNT$ palabras de \"$SET$\".",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "set": {
+        "content": "$2"
+      }
+    }
+  },
+  "statusSiteEnabled": {
+    "message": "Filtrando en $SITE$.",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "statusSiteDisabled": {
+    "message": "Filtro desactivado en $SITE$.",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "statusPermissionDenied": {
+    "message": "No se concedió acceso a este sitio, así que no se puede filtrar."
+  },
+  "errorUnknown": {
+    "message": "Error inesperado: $DETAILS$",
+    "placeholders": {
+      "details": {
+        "content": "$1"
+      }
+    }
+  }
+}

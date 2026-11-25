@@ -1,0 +1,192 @@
+<!doctype html>
+<!--
+  Fictional news front page used only to produce the store screenshots
+  (scripts/store-assets.js). All headlines are made up. The real content
+  scripts run at the end of the body against a stubbed chrome API
+  (store/assets-src/stub.js); `?filter=off` shows the page unfiltered.
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Diario Demo</title>
+    <style>
+      :root {
+        --ink: #1d1d1f;
+        --muted: #6b6b70;
+        --rule: #e3e3e6;
+        --accent: #b3261e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #fff;
+        color: var(--ink);
+        font:
+          15px/1.35 Georgia,
+          'Times New Roman',
+          serif;
+      }
+      header {
+        padding: 14px 28px 10px;
+        border-bottom: 3px double var(--ink);
+        text-align: center;
+      }
+      .masthead {
+        margin: 0;
+        font-size: 34px;
+        letter-spacing: 0.5px;
+      }
+      .date {
+        color: var(--muted);
+        font:
+          12px system-ui,
+          sans-serif;
+      }
+      nav {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+        padding: 8px;
+        border-bottom: 1px solid var(--rule);
+        font:
+          600 12px system-ui,
+          sans-serif;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      main {
+        padding: 18px 28px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px 22px;
+      }
+      .card a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+      .thumb {
+        height: 92px;
+        margin-bottom: 8px;
+        border-radius: 4px;
+      }
+      .kicker {
+        display: block;
+        color: var(--accent);
+        font:
+          700 11px system-ui,
+          sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      h2 {
+        margin: 2px 0 0;
+        font-size: 18px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="masthead">Diario Demo</h1>
+      <div class="date">Edición de demostración · titulares ficticios</div>
+    </header>
+    <nav>
+      <span>Portada</span><span>Economía</span><span>Sociedad</span><span>Deportes</span><span>Cultura</span>
+    </nav>
+    <main>
+      <div class="grid">
+        <article class="card">
+          <a href="/economia/precios"
+            ><div class="thumb" style="background: linear-gradient(135deg, #cfd8dc, #90a4ae)"></div>
+            <span class="kicker">Economía</span>
+            <h2>El índice de precios bajó por tercer mes consecutivo</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/deportes/clasico"
+            ><div class="thumb" style="background: linear-gradient(135deg, #c8e6c9, #66bb6a)"></div>
+            <span class="kicker">Fútbol</span>
+            <h2>El clásico del domingo ya tiene horario y árbitro</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/ciencia/rana"
+            ><div class="thumb" style="background: linear-gradient(135deg, #dcedc8, #9ccc65)"></div>
+            <span class="kicker">Ciencia</span>
+            <h2>Describen una nueva especie de rana en la selva</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/deportes/calendario"
+            ><div class="thumb" style="background: linear-gradient(135deg, #ffcdd2, #e57373)"></div>
+            <span class="kicker">Automovilismo</span>
+            <h2>La Fórmula 1 presentó el calendario de la próxima temporada</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/sociedad/calor"
+            ><div class="thumb" style="background: linear-gradient(135deg, #ffe0b2, #ffb74d)"></div>
+            <span class="kicker">Clima</span>
+            <h2>Alerta por calor: se esperan 38 grados el fin de semana</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/espectaculos/pelea"
+            ><div class="thumb" style="background: linear-gradient(135deg, #e1bee7, #ba68c8)"></div>
+            <span class="kicker">Espectáculos</span>
+            <h2>Farándula: la pelea en vivo que paralizó un programa de TV</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/cultura/muestra"
+            ><div class="thumb" style="background: linear-gradient(135deg, #d1c4e9, #9575cd)"></div>
+            <span class="kicker">Cultura</span>
+            <h2>Abre una muestra de fotografía urbana en el centro cultural</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/gastronomia/pizza"
+            ><div class="thumb" style="background: linear-gradient(135deg, #ffecb3, #ffca28)"></div>
+            <span class="kicker">Gastronomía</span>
+            <h2>Eligieron la mejor pizza de la ciudad y la votación terminó en polémica</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/tecnologia/contrasenas"
+            ><div class="thumb" style="background: linear-gradient(135deg, #b3e5fc, #4fc3f7)"></div>
+            <span class="kicker">Tecnología</span>
+            <h2>Cómo proteger tus contraseñas: la guía de los especialistas</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/deportes/gira"
+            ><div class="thumb" style="background: linear-gradient(135deg, #b2dfdb, #4db6ac)"></div>
+            <span class="kicker">Gira de fin de año</span>
+            <h2>El seleccionado de rugby confirmó la lista de convocados</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/salud/vacunas"
+            ><div class="thumb" style="background: linear-gradient(135deg, #f8bbd0, #f06292)"></div>
+            <span class="kicker">Salud</span>
+            <h2>Vacunación de invierno: cuándo y dónde aplicarse la dosis</h2></a
+          >
+        </article>
+        <article class="card">
+          <a href="/educacion/inscripcion"
+            ><div class="thumb" style="background: linear-gradient(135deg, #c5cae9, #7986cb)"></div>
+            <span class="kicker">Educación</span>
+            <h2>Las universidades abren la inscripción para el próximo ciclo</h2></a
+          >
+        </article>
+      </div>
+    </main>
+    <script src="/extension/content/filter-core.js"></script>
+    <script src="/extension/content/filter.js"></script>
+  </body>
+</html>

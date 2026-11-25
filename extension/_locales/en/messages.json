@@ -1,0 +1,127 @@
+{
+  "extName": {
+    "message": "nomeinteresa"
+  },
+  "extDescription": {
+    "message": "Hides news articles whose titles contain your keywords, on the sites you choose."
+  },
+  "actionTitle": {
+    "message": "nomeinteresa"
+  },
+  "badgeTitle": {
+    "message": "nomeinteresa: $COUNT$ hidden on this page",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupTitle": {
+    "message": "nomeinteresa"
+  },
+  "popupThisSite": {
+    "message": "This site"
+  },
+  "popupSiteEnabled": {
+    "message": "Hide matching articles on this site"
+  },
+  "popupHiddenHeading": {
+    "message": "Hidden on this page ($COUNT$)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupHiddenNone": {
+    "message": "No articles hidden on this page."
+  },
+  "popupHiddenInactive": {
+    "message": "Filtering is off on this page."
+  },
+  "popupMatchedKeyword": {
+    "message": "Matched keyword: $KEYWORD$",
+    "placeholders": {
+      "keyword": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupSiteUnavailable": {
+    "message": "Filtering is not available on this page."
+  },
+  "popupKeywords": {
+    "message": "Keywords"
+  },
+  "popupKeywordsPlaceholder": {
+    "message": "football\nMessi\nWorld Cup"
+  },
+  "popupKeywordsHelp": {
+    "message": "One per line. Articles whose title (headline or the short lead-in above it) contains a keyword as a whole word are hidden, ignoring case and accents. Put a keyword in double quotes to match capital letters exactly: \"Máxima\" hides \"Máxima visitó…\" but not \"temperatura máxima\". Applies to all enabled sites."
+  },
+  "popupAddPreset": {
+    "message": "Add a keyword set:"
+  },
+  "presetFarandula": {
+    "message": "Celebrity gossip"
+  },
+  "presetFutbol": {
+    "message": "Football"
+  },
+  "presetAutomovilismo": {
+    "message": "Motorsport"
+  },
+  "presetRugby": {
+    "message": "Rugby"
+  },
+  "presetTecnoptimistas": {
+    "message": "Tech optimists"
+  },
+  "presetGastronomia": {
+    "message": "Food awards"
+  },
+  "presetCelebridades": {
+    "message": "Celebrities"
+  },
+  "statusSaved": {
+    "message": "Keywords saved."
+  },
+  "statusPresetAdded": {
+    "message": "Added $COUNT$ keywords from \"$SET$\".",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "set": {
+        "content": "$2"
+      }
+    }
+  },
+  "statusSiteEnabled": {
+    "message": "Filtering on $SITE$.",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "statusSiteDisabled": {
+    "message": "Filtering off on $SITE$.",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "statusPermissionDenied": {
+    "message": "Access to this site was not granted, so it can't be filtered."
+  },
+  "errorUnknown": {
+    "message": "Unexpected error: $DETAILS$",
+    "placeholders": {
+      "details": {
+        "content": "$1"
+      }
+    }
+  }
+}

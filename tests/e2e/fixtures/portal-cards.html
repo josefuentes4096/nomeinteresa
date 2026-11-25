@@ -1,0 +1,70 @@
+<!doctype html>
+<!--
+  Home page markup modeled on a large news portal: each card is <a class="card-link">
+  with a headline <h2> and a summary <h3>, inside a layout item.
+  data-expect marks what each element should look like after filtering for "fútbol" and "Messi".
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Portada</title>
+  </head>
+  <body>
+    <header>
+      <nav><a href="/economia/">Economía</a> <a href="/deportes/">Deportes</a></nav>
+    </header>
+    <main>
+      <div class="grid">
+        <div class="grid-row">
+          <div class="grid-item" id="economy" data-expect="visible">
+            <a href="/economia/2026/11/24/recesion/" class="card-link">
+              <div class="card-info">
+                <h2 class="card-headline headline">La actividad económica entró en recesión</h2>
+                <h3 class="card-summary">El EMAE mostró una suba mensual, pero no alcanzó.</h3>
+                <p class="card-byline">Por <b class="author-name">Autor</b></p>
+              </div>
+              <div class="card-image"><img alt="" /></div>
+            </a>
+          </div>
+          <div class="grid-item" id="football" data-expect="hidden">
+            <a href="/deportes/2026/11/24/futbol-argentino/" class="card-link">
+              <div class="card-info">
+                <h2 class="card-headline headline">El FÚTBOL argentino define al campeón</h2>
+                <h3 class="card-summary">Los equipos llegan a la última fecha.</h3>
+              </div>
+              <div class="card-image"><img alt="" /></div>
+            </a>
+          </div>
+          <div class="grid-item" id="deck-only" data-expect="visible">
+            <a href="/sociedad/2026/11/24/clima/" class="card-link">
+              <div class="card-info">
+                <h2 class="card-headline headline">Alerta por tormentas en el AMBA</h2>
+                <!-- Only the headline counts as the title: a summary mentioning a keyword doesn't hide the article. -->
+                <h3 class="card-summary">Suspenden los partidos de fútbol del fin de semana.</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <section class="list">
+        <h2 class="section-title" id="section" data-expect="visible">Más noticias</h2>
+        <div class="feed-card" id="messi" data-expect="hidden">
+          <a href="/deportes/messi/"><img alt="" /></a>
+          <a href="/deportes/messi/" class="card-link"><h2 class="headline">Messi renovó con su club</h2></a>
+        </div>
+        <div class="feed-card" id="golf" data-expect="visible">
+          <a href="/deportes/golf/" class="card-link"
+            ><h2 class="headline">Golf: el torneo de Buenos Aires</h2></a
+          >
+        </div>
+        <!-- The same article shown again in another block (common on portal home pages): both copies are hidden. -->
+        <div class="feed-card" id="football-again" data-expect="hidden">
+          <a href="/deportes/2026/11/24/futbol-argentino/" class="card-link"
+            ><h2 class="headline">El fútbol argentino define al campeón</h2></a
+          >
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
