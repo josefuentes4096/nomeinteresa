@@ -5,9 +5,10 @@
 [![CI](https://github.com/josefuentes4096/nomeinteresa/actions/workflows/ci.yml/badge.svg)](https://github.com/josefuentes4096/nomeinteresa/actions/workflows/ci.yml)
 [![Licencia: 0BSD](https://img.shields.io/badge/licencia-0BSD-blue.svg)](LICENSE)
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)
+![Complemento de Firefox](https://img.shields.io/badge/Firefox-140%2B-FF7139?logo=firefoxbrowser&logoColor=white)
 ![Sin dependencias en ejecución](https://img.shields.io/badge/dependencias%20en%20ejecuci%C3%B3n-0-brightgreen)
 
-Extensión de Chrome que **oculta las noticias cuyo titular contiene tus palabras clave**, en los sitios que elijas. El nombre viene de "no me interesa".
+Extensión para **Chrome y Firefox** que **oculta las noticias cuyo titular contiene tus palabras clave**, en los sitios que elijas. El nombre viene de "no me interesa".
 
 ![Portada de noticias con cinco artículos ocultos y la ventana de la extensión que los lista](store/images/es/screenshot-1-filtered.png)
 
@@ -25,7 +26,8 @@ Este proyecto es **puramente académico**. Lo construí para practicar cómo lle
 - **Informe:** la ventana de la extensión lista los artículos ocultos en la página actual (volanta, titular y la palabra clave que coincidió) y cuántos son.
 - **Contador:** el icono de la barra de herramientas muestra cuántos artículos se ocultaron en la pestaña actual, con un globo rojo como el de las notificaciones.
 - **En vivo:** también se filtran los artículos que aparecen al desplazarte, y los cambios en tus palabras se aplican al instante en las pestañas abiertas.
-- **Idiomas:** inglés y español, según el idioma de Chrome.
+- **Chrome y Firefox:** el mismo código y el mismo manifiesto funcionan en los dos navegadores.
+- **Idiomas:** inglés y español, según el idioma del navegador.
 
 | Antes / después                                                              | Ventana de la extensión                                               |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -36,13 +38,17 @@ _Las capturas usan una página de demostración ficticia, con titulares inventad
 ## Instalación
 
 - **Chrome Web Store:** próximamente.
-- **Modo desarrollador:** abre `chrome://extensions`, activa el **Modo de desarrollador**, haz clic en **Cargar descomprimida** y selecciona la carpeta **`extension/`**.
+- **Complementos de Firefox:** próximamente.
+- **Chrome, modo desarrollador:** abre `chrome://extensions`, activa el **Modo de desarrollador**, haz clic en **Cargar descomprimida** y selecciona la carpeta **`extension/`**.
+- **Firefox, instalación temporal:** abre `about:debugging#/runtime/this-firefox`, haz clic en **Cargar complemento temporal…** y selecciona **`extension/manifest.json`**. Queda instalada hasta que reinicies Firefox.
+
+Requiere Chrome 121 o superior, o Firefox 140 o superior (escritorio).
 
 ## Uso
 
 1. Abre el sitio de noticias que quieres filtrar y haz clic en el icono de la extensión.
 2. Agrega un conjunto de palabras (por ejemplo **+ Fútbol**) o escribe las tuyas, una por línea.
-3. Activa **Ocultar artículos coincidentes en este sitio** y acepta el aviso de Chrome para permitir el acceso a ese sitio.
+3. Activa **Ocultar artículos coincidentes en este sitio** y acepta el aviso del navegador para permitir el acceso a ese sitio.
 
 Para dejar de filtrar un sitio, desactiva la casilla. Las palabras clave son las mismas para todos los sitios activados.
 
@@ -81,7 +87,7 @@ La extensión **no se conecta con ningún servidor**: sin analíticas, sin telem
 | `activeTab`                             | Leer la dirección de la pestaña actual al abrir la ventana, para mostrar y activar su sitio.    |
 | `optional_host_permissions` (`*://*/*`) | No se concede nada al instalar. El acceso se pide **por sitio**, solo cuando activas ese sitio. |
 
-Puedes revisar o quitar el acceso a los sitios en cualquier momento en `chrome://extensions` → nomeinteresa → Detalles → Acceso a sitios.
+Puedes revisar o quitar el acceso a los sitios en cualquier momento: en Chrome, `chrome://extensions` → nomeinteresa → Detalles → Acceso a sitios; en Firefox, `about:addons` → nomeinteresa → Permisos.
 
 ## Limitaciones conocidas
 
@@ -90,13 +96,14 @@ Puedes revisar o quitar el acceso a los sitios en cualquier momento en `chrome:/
 - Una palabra entre comillas igual coincide cuando el título empieza con la palabra común: `"Máxima"` oculta "Máxima tensión en…".
 - Algunas palabras sueltas quedan fuera de los conjuntos a propósito porque también son palabras comunes (por ejemplo "Boca", que también es la parte del cuerpo). Agrégalas tú si las quieres.
 - En una página lenta, un artículo coincidente puede verse un instante antes de ocultarse en la primera carga.
-- No funciona en páginas protegidas de Chrome (`chrome://`, Chrome Web Store).
+- No funciona en páginas protegidas del navegador (`chrome://`, `about:`, la Chrome Web Store, addons.mozilla.org).
 
 ## Aspectos de ingeniería
 
 - **Desarrollo guiado por especificaciones.** El comportamiento se acuerda por escrito antes del código: la [spec 001](docs/specs/001-keyword-filter/spec.md) lista cada requisito, y cada criterio de aceptación enlaza al test que lo verifica. Un registro de decisiones explica por qué las cosas son como son.
 - **Probado contra un navegador real, sin dependencias de tests.** Los tests end-to-end manejan Chrome headless por el protocolo de DevTools con un cliente propio y pequeño (`tests/e2e/chrome.js`) y ejecutan los scripts de contenido reales sobre páginas que reproducen el marcado de sitios de noticias: tarjetas con titular, volantas, páginas de artículo, artículos repetidos y scroll infinito. Los errores encontrados en sitios reales se convirtieron en páginas de prueba antes de corregirse.
 - **JavaScript tipado, sin compilación.** Módulos ES con tipos JSDoc comprobados por TypeScript en modo `strict`. Lo que hay en `extension/` es exactamente lo que se publica.
+- **Un manifiesto, dos navegadores.** La misma carpeta `extension/` y el mismo zip funcionan en Chrome y Firefox: el manifiesto declara el script de fondo como service worker (Chrome) y como script de fondo (Firefox), más los ajustes de complemento de Firefox. `web-ext lint` de Mozilla lo comprueba en la CI, y hay tests que fijan las reglas del manifiesto compartido.
 - **Mínimos permisos.** Sin acceso a sitios al instalar; acceso por sitio pedido en tiempo de ejecución y revocable; ningún acceso a la red. Un test falla si el manifiesto pide más.
 - **Núcleo puro, capa fina.** Las coincidencias y la detección de títulos y tarjetas viven en un archivo sin llamadas a `chrome.*`, así que el mismo código corre en los tests unitarios de Node, en los end-to-end y en la extensión.
 - **Publicación reproducible.** `npm run package` genera el zip para la tienda con un escritor de ZIP sin dependencias; `npm run store-assets` regenera todas las imágenes de la tienda desde plantillas HTML usando la ventana y los scripts de contenido reales sobre una página ficticia. La CI genera el zip en cada push.
@@ -111,6 +118,7 @@ Cada push y pull request ejecuta estos controles en [GitHub Actions](.github/wor
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Lint             | ESLint (configuración plana): reglas recomendadas más igualdad estricta, `const`/sin `var` y `console` restringido                                                         |
 | Formato          | Prettier y EditorConfig                                                                                                                                                    |
+| Lint de Firefox  | `web-ext lint` de Mozilla sobre `extension/`: el manifiesto y el código son válidos para Firefox                                                                           |
 | Tipos            | TypeScript en modo `strict` con `checkJs`, sobre JavaScript anotado con JSDoc                                                                                              |
 | Tests unitarios  | `node:test`: coincidencia de palabras, validación de ajustes, conjuntos de palabras, texto del contador, límites de la tienda, paridad de traducciones y reglas del script |
 | Tests end-to-end | Los scripts de contenido reales en **Chrome headless** sobre marcado realista de páginas de noticias, comprobando qué se oculta, qué informa la ventana y el contador      |
@@ -118,13 +126,13 @@ Cada push y pull request ejecuta estos controles en [GitHub Actions](.github/wor
 
 ## Desarrollo
 
-Requisitos: Node.js 26 o superior, y Chrome para los tests end-to-end y las imágenes de la tienda.
+Requisitos: Node.js 26 o superior, y Chrome para los tests end-to-end y las imágenes de la tienda. Firefox es opcional, para pruebas manuales.
 
 ```sh
 npm install
-npm run check          # lint + formato + tipos + tests unitarios
+npm run check          # lint + lint de Firefox + formato + tipos + tests unitarios
 npm run test:e2e       # scripts de contenido en Chrome headless (define CHROME_PATH si Chrome no está en una ruta estándar)
-npm run package        # dist/nomeinteresa-<versión>.zip para la Chrome Web Store
+npm run package        # dist/nomeinteresa-<versión>.zip para la Chrome Web Store y Complementos de Firefox
 npm run store-assets   # regenera store/images/
 npm run format         # formatea el código con Prettier
 ```
@@ -150,7 +158,7 @@ tests/                     Tests unitarios (node:test)
 scripts/                   package.js (zip para la tienda), store-assets.js (imágenes de la tienda)
 store/                     Textos de la ficha, respuestas de privacidad, imágenes y sus fuentes HTML
 docs/specs/                Especificaciones (plantilla + una carpeta por spec)
-docs/publishing.md         Lista de pasos para publicar en la Chrome Web Store
+docs/publishing.md         Pasos para publicar en la Chrome Web Store y en Complementos de Firefox
 CLAUDE.md                  Constitución del proyecto: reglas, flujo de trabajo y convenciones
 ```
 

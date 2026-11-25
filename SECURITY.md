@@ -8,7 +8,7 @@ informe de forma privada.
 
 Incluye, si puedes:
 
-- versión de la extensión y de Chrome,
+- versión de la extensión y del navegador (Chrome o Firefox),
 - pasos para reproducirlo,
 - impacto esperado (por ejemplo, ejecución de código en la página, filtración de las palabras clave o de los sitios activados).
 

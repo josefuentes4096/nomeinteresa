@@ -7,6 +7,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). E
 
 ### Añadido
 
+- Compatibilidad con Firefox (140 o superior, escritorio) con el mismo código, el mismo manifiesto y el mismo paquete que Chrome. La CI valida la extensión con `web-ext lint` de Mozilla.
 - Preparación para la Chrome Web Store: nombre **nomeinteresa**, versión 1.0.0, política de privacidad (`PRIVACY.md`), textos de la ficha y respuestas de privacidad (`store/`), imágenes generadas con `npm run store-assets`, paquete con `npm run package` y guía de publicación (`docs/publishing.md`).
 - Oculta los artículos cuyo título contiene alguna de tus palabras clave, sin distinguir mayúsculas ni acentos, como tarjetas completas.
 - Activación por sitio desde la ventana de la extensión, con permiso de acceso pedido solo para ese sitio.

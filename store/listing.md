@@ -1,4 +1,8 @@
-# Chrome Web Store listing
+# Store listings: Chrome Web Store and Firefox Add-ons
+
+The same texts and images serve both stores. For the Chrome Web Store, copy them into the Developer Dashboard (**Store listing** tab); for Firefox, see [Firefox Add-ons](#firefox-add-ons-amo) below.
+
+## Chrome Web Store
 
 Copy these texts into the Developer Dashboard (**Store listing** tab). The
 English listing is the default; add Spanish as a second language with the same
@@ -20,6 +24,31 @@ keyword-spam policy rejects listings stuffed with search terms.
 | Small promo tile   | `store/images/en/promo-small-440x280.png` / `store/images/es/promo-small-440x280.png`         |
 
 Regenerate the images with `npm run store-assets` after any visible change to the popup.
+
+## Firefox Add-ons (AMO)
+
+Fill in the add-on's page in the [Developer Hub](https://addons.mozilla.org/developers/) (**Edit Product Page**). The upload is the same zip as for Chrome.
+
+| Field              | Value                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| Name and summary   | Taken from the manifest (`extName`, `extDescription`) in English and Spanish                         |
+| Description        | The descriptions below (AMO accepts plain text with line breaks)                                     |
+| Categories         | Pick the closest ones the form offers for news and filtering (for example, "Feeds, News & Blogging") |
+| Platform           | Firefox (desktop). Leave Firefox for Android unchecked until it has been tested there                |
+| Homepage           | https://github.com/josefuentes4096/nomeinteresa                                                      |
+| Support site       | https://github.com/josefuentes4096/nomeinteresa/issues                                               |
+| License            | 0BSD (choose "Other" if it is not in the list and link `LICENSE`)                                    |
+| Privacy policy     | Paste the text of `PRIVACY.md`                                                                       |
+| Screenshots        | The same `store/images/en/` and `store/images/es/` screenshots                                       |
+| Notes for reviewer | See below                                                                                            |
+
+Notes for reviewer:
+
+```text
+No build step, bundler or minifier: the uploaded zip is the source (also at https://github.com/josefuentes4096/nomeinteresa, folder extension/).
+To test: open a news site, click the toolbar icon, add a keyword set (for example "+ Football"), turn on "Hide matching articles on this site" and grant access to that site. Matching articles disappear; the popup lists them and the toolbar badge shows the count.
+The extension makes no network requests and collects no data (data_collection_permissions: none).
+```
 
 ## Description — English
 

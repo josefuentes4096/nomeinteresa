@@ -26,7 +26,7 @@ La spec va en el mismo PR que el código, y cada criterio de aceptación enlaza 
 
 1. `npm install` y luego `npm run check` y `npm run test:e2e`. La CI ejecuta lo mismo y debe pasar.
 2. Añade o actualiza los tests en `tests/` si cambias lógica pura (coincidencias, ajustes, conjuntos), y en `tests/e2e/` si cambias cómo se detectan u ocultan los artículos. Si un sitio filtra mal, reproduce su marcado como página de prueba en `tests/e2e/fixtures/` con `data-expect="hidden|visible"`.
-3. Prueba manualmente la extensión cargando `extension/` en `chrome://extensions`, en un portal de noticias real:
+3. Prueba manualmente la extensión en Chrome (cargando `extension/` en `chrome://extensions`) y en Firefox (`about:debugging` → **Cargar complemento temporal…**), en un portal de noticias real:
    - activar el sitio (y denegar el permiso una vez),
    - agregar y quitar palabras con la pestaña abierta,
    - desplazarte hasta que cargue más contenido.
