@@ -22,18 +22,18 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "scripts": {
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --project jsconfig.json",
-    "test": "node --test tests/",
-    "test:e2e": "node --experimental-websocket --test tests/e2e/filter.e2e.js",
+    "test": "node --test \"tests/*.test.js\"",
+    "test:e2e": "node --test tests/e2e/filter.e2e.js",
     "check": "npm run lint && npm run format:check && npm run typecheck && npm test",
     "package": "node scripts/package.js",
-    "store-assets": "node --experimental-websocket scripts/store-assets.js"
+    "store-assets": "node scripts/store-assets.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
