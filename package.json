@@ -39,9 +39,9 @@
     "store-assets": "node scripts/store-assets.js"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
+    "@eslint/js": "^10.0.1",
     "@types/chrome": "^0.0.287",
-    "eslint": "^9.17.0",
+    "eslint": "^10.15.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
     "typescript": "^5.7.2",
